@@ -95,3 +95,42 @@ h1 {
 .border-checking {
   border-left: 4px solid #bdc3c7;
 }
+
+/* top‑right container */
+#logos {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;   /* stack vertically */
+  gap: 10px;
+  align-items: flex-end;    /* keep them right‑aligned */
+}
+
+/* force equal width for both logos */
+#logos .top-logo {
+  width: 160px !important;  /* pick your size */
+  height: auto !important;
+  opacity: 0.9;
+}
+
+#footer-logo {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* adjust as needed */
+  background: #ffffff; /* or transparent */
+  display: flex;
+  justify-content: center; /* center the PNG horizontally */
+  align-items: center;     /* center vertically */
+  padding: 8px 0;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1); /* optional */
+  z-index: 999;
+}
+
+#footer-logo .footer-img {
+  height: auto; /* consistent size */
+  width: 100%;
+  opacity: 0.9;
+}

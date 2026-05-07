@@ -3,10 +3,13 @@
 # ============================
 FROM python:3.11-slim AS builder
 
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
 # Install build deps
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
@@ -22,6 +25,8 @@ RUN pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
 # Stage 2 — Runtime image
 # ============================
 FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
