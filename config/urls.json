@@ -1,8 +1,8 @@
 {
   "urls": [
-    { "name": "Scorpio", "url": "https://portal.scorpio.astro-flow.com" },
-    { "name": "Aquarius", "url": "https://portal.aquarius.astro-flow.com" },
-    { "name": "Sagittarius", "url": "https://portal.sagittarius.astro-flow.com" },
-    { "name": "Capricorn", "url": "https://portal.capricorn.astro-flow.com" }
+    { "name": "Scorpio", "url": "https://hub.scorpio.astro-flow.com" },
+    { "name": "Aquarius", "url": "https://hub.aquarius.astro-flow.com" },
+    { "name": "Sagittarius", "url": "https://hub.sagittarius.astro-flow.com" },
+    { "name": "Capricorn", "url": "https://hub.capricorn.astro-flow.com" }
   ]
 }
