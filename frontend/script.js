@@ -47,7 +47,7 @@ async function checkStatus(entry) {
   const icon = document.getElementById(`icon-${entry.name}`);
 
   try {
-    const response = await fetch(`/status?url=${encodeURIComponent(entry.url)}`);
+    const response = await fetch(`0.0.0.0:8000/status?url=${encodeURIComponent(entry.url)}`);
     const text = await response.text();
 
     let parsed = null;
