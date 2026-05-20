@@ -4,13 +4,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadUrls() {
   const list = document.getElementById("statusList");
-
   let config;
   try {
-    const res = await fetch("../config/urls.json");
+    const res = await fetch("/config/urls.json");
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     config = await res.json();
   } catch (err) {
     console.error("Failed to load config:", err);
+    list.innerHTML = `<p class="error">Failed to load URLs config: ${err.message}</p>`;
+    return;
+  }
+
+  if (!Array.isArray(config.urls)) {
+    console.error("config.urls is not an array:", config);
     return;
   }
 
