@@ -5,36 +5,29 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import uvicorn
+from typing import Optional
 
 app = FastAPI(title="AstroFlow Status")
 
 
-def load_urls():
-    with open("../config/urls.json") as f:
-        return json.load(f)["urls"]
+_client = httpx.AsyncClient(timeout=10)
 
 
-_client = httpx.AsyncClient(timeout=3.0, follow_redirects=True)
-
-
-async def check_single_url(url: str):
+async def check_url(url: str):
     try:
-        r = await _client.head(url, follow_redirects=True)
+        r = await _client.get(url, follow_redirects=True)
         if r.status_code < 400:
             return {"url": url, "status": "online", "code": r.status_code}
         else:
             return {"url": url, "status": "error", "code": r.status_code}
     except Exception as e:
-        print(f"Error occurred while checking {url}: {e}")
+        print(f"Error checking {url}: {e}")
         return {"url": url, "status": "offline", "code": None}
 
 
 @app.get("/status")
-async def status():
-    urls = load_urls()
-    tasks = [check_single_url(url["url"]) for url in urls]
-    results = await asyncio.gather(*tasks)
-    return {"urls": urls, "results": results}
+async def status(url: str):
+    return await check_url(url)
 
 
 app.mount("/config", StaticFiles(directory="../config"), name="config")
